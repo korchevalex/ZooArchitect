@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <title>Spectral by HTML5 UP</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <link rel="stylesheet" href="/css/main.css" />
+        <noscript><link rel="stylesheet" href="/css/noscript.css" /></noscript>
+    </head>
+    <body class="landing is-preload">
+
+<!-- Page Wrapper -->
+        <div id="page-wrapper">
+
+            <!-- Header -->
+            <header th:replace="fragments/header.html" id="header" class="alt"></header>
+
+            <article id="main">
+                <header>
+                    <h2>Sign Up</h2>
+                </header>
+                <section class="wrapper style5">
+                    <div class="inner">
+                        <form method="post" action="#">
+                            <div class="row gtr-uniform">
+                                <div class="col-6 col-12-xsmall">
+                                    <input type="text" name="demo-name" id="demo-name" value="" placeholder="Name" />
+                                </div>
+                                <div class="col-6 col-12-xsmall">
+                                    <input type="password" name="demo-password" id="demo-password" value="" placeholder="Password" />
+                                </div>
+                                <div class="col-6 col-12-xsmall">
+                                    <input type="email" name="demo-email" id="demo-email" value="" placeholder="Email" />
+                                </div>
+                                <div class="col-6 col-12-xsmall">
+                                    <input type="password" name="demo-confirm-password" id="demo-confirm-password" value="" placeholder="Confirm Password" />
+                                </div>
+                                <div class="col-12">
+                                    <ul class="actions">
+                                        <li><input type="submit" value="Sign up" class="primary" /></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+            </article>
+            <footer th:replace="fragments/footer.html" id="footer"></footer>
+        </div>
+
+        <script src="/js/jquery.min.js"></script>
+        <script src="/js/jquery.scrollex.min.js"></script>
+        <script src="/js/jquery.scrolly.min.js"></script>
+        <script src="/js/browser.min.js"></script>
+        <script src="/js/breakpoints.min.js"></script>
+        <script src="/js/util.js"></script>
+        <script src="/js/main.js"></script>
+    </body>
+</html>
