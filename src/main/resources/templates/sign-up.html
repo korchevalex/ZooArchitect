@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="en">
     <head>
-        <title>Spectral by HTML5 UP</title>
+        <title>Sign Up</title>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
         <link rel="stylesheet" href="/css/main.css" />
@@ -13,7 +13,7 @@
         <div id="page-wrapper">
 
             <!-- Header -->
-            <header th:replace="fragments/header.html" id="header" class="alt"></header>
+            <header th:replace="~{fragments/header.html}" id="header" class="alt"></header>
 
             <article id="main">
                 <header>
@@ -21,19 +21,29 @@
                 </header>
                 <section class="wrapper style5">
                     <div class="inner">
-                        <form method="post" action="#">
+                        <form th:method="post" th:action="@{/users/sign-up}" th:object="${userDTO}">
+                            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                             <div class="row gtr-uniform">
                                 <div class="col-6 col-12-xsmall">
-                                    <input type="text" name="demo-name" id="demo-name" value="" placeholder="Name" />
+                                    <label for="demo-name"></label>
+                                    <input th:field="*{username}" type="text" name="demo-name" id="demo-name" value="" placeholder="Name" />
+                                    <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
                                 </div>
                                 <div class="col-6 col-12-xsmall">
-                                    <input type="password" name="demo-password" id="demo-password" value="" placeholder="Password" />
+                                    <label for="demo-password"></label>
+                                    <input th:field="*{password}" type="password" name="demo-password" id="demo-password" value="" placeholder="Password" />
+                                    <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
                                 </div>
                                 <div class="col-6 col-12-xsmall">
-                                    <input type="email" name="demo-email" id="demo-email" value="" placeholder="Email" />
+                                    <label for="demo-email"></label>
+                                    <input th:field="*{email}" type="email" name="demo-email" id="demo-email" value="" placeholder="Email" />
+                                    <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
                                 </div>
                                 <div class="col-6 col-12-xsmall">
-                                    <input type="password" name="demo-confirm-password" id="demo-confirm-password" value="" placeholder="Confirm Password" />
+                                    <label for="demo-confirm-password"></label>
+                                    <input th:field="*{confirmPassword}" type="password" name="demo-confirm-password" id="demo-confirm-password" value="" placeholder="Confirm Password" />
+                                    <div th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></div>
+                                    <div th:if="${passwordMismatch}" class="text-danger">Passwords do not match.</div>
                                 </div>
                                 <div class="col-12">
                                     <ul class="actions">
@@ -45,7 +55,7 @@
                     </div>
                 </section>
             </article>
-            <footer th:replace="fragments/footer.html" id="footer"></footer>
+            <footer th:replace="~{fragments/footer.html}" id="footer"></footer>
         </div>
 
         <script src="/js/jquery.min.js"></script>

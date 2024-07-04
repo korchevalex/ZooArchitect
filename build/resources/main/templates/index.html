@@ -6,7 +6,7 @@
 -->
 <html lang="en">
 	<head>
-		<title>Spectral by HTML5 UP</title>
+		<title>Zoo Architect</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="/css/main.css" />
@@ -18,7 +18,7 @@
 			<div id="page-wrapper">
 
 				<!-- Header -->
-					<header th:replace="fragments/header.html" id="header" class="alt">
+					<header th:replace="~{fragments/header.html}" id="header" class="alt">
 						<h1><a href="index.html">Spectral</a></h1>
 						<nav id="nav">
 							<ul>
@@ -29,7 +29,7 @@
 											<li><a href="index.html">Home</a></li>
 											<li><a href="generic.html">Generic</a></li>
 											<li><a href="elements.html">Elements</a></li>
-											<li><a href="#">Register</a></li>
+											<li><a href="#">Sign Up</a></li>
 											<li><a href="#">Log In</a></li>
 										</ul>
 									</div>
@@ -46,8 +46,8 @@
 							site template freebie<br />
 							crafted by <a href="https://html5up.net">HTML5 UP</a>.</p>
 							<ul class="actions special">
-								<li><a href="#" class="button primary">Register</a></li>
-								<li><a href="#" class="button primary">Log In</a></li>
+								<li><a href="/users/sign-up" class="button primary">Sign Up</a></li>
+								<li><a href="/users/login" class="button primary">Log In</a></li>
 							</ul>
 						</div>
 						<a href="#one" class="more scrolly">Learn More</a>
@@ -147,7 +147,7 @@
 					</section>
 
 				<!-- Footer -->
-					<footer th:replace="fragments/footer.html" id="footer">
+					<footer th:replace="~{fragments/footer.html}" id="footer">
 						<ul class="icons">
 							<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
 							<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
