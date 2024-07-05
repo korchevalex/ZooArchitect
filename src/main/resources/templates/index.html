@@ -4,7 +4,9 @@
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	  lang="en">
 	<head>
 		<title>Zoo Architect</title>
 		<meta charset="utf-8" />
@@ -41,12 +43,13 @@
 				<!-- Banner -->
 					<section id="banner">
 						<div class="inner">
-							<h2>Zoo Architect</h2>
+							<h2 sec:authorize="isAnonymous()">Zoo Architect</h2>
+							<h2 sec:authorize="isAuthenticated()">Welcome <span sec:authentication="name"></span></h2>
 							<p>Another fine responsive<br />
 							site template freebie<br />
 							crafted by <a href="https://html5up.net">HTML5 UP</a>.</p>
-							<ul class="actions special">
-								<li><a href="/users/sign-up" class="button primary">Sign Up</a></li>
+							<ul sec:authorize="isAnonymous()" class="actions special">
+								<li><a href="/users/register" class="button primary">Register</a></li>
 								<li><a href="/users/login" class="button primary">Log In</a></li>
 							</ul>
 						</div>

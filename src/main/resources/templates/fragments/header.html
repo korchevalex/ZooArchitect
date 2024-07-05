@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <header id="header">
     <h1><a href="/">Zoo Architect</a></h1>
     <nav id="nav">
@@ -8,11 +10,16 @@
                 <a href="#menu" class="menuToggle"><span>Menu</span></a>
                 <div id="menu">
                     <ul>
-                        <li><a href="/">Home</a></li>
-                        <li><a href="/generic">Generic</a></li>
-                        <li><a href="/elements">Elements</a></li>
-                        <li><a href="/users/sign-up">Sign Up</a></li>
-                        <li><a href="/users/login">Log In</a></li>
+                        <li><a th:href="@{/}">Home</a></li>
+                        <li sec:authorize="isAuthenticated()"><a th:href="@{/generic}">Generic</a></li>
+                        <li sec:authorize="isAuthenticated()"><a th:href="@{/elements}">Elements</a></li>
+                        <li sec:authorize="isAnonymous()"><a th:href="@{/users/register}">Register</a></li>
+                        <li sec:authorize="isAnonymous()"><a th:href="@{/users/login}">Log In</a></li>
+                        <li sec:authorize="isAuthenticated()">
+                            <form th:method="POST" th:action="@{/users/logout}">
+                                <button class="button fit">Logout</button>
+                            </form>
+                        </li>
                     </ul>
                 </div>
             </li>

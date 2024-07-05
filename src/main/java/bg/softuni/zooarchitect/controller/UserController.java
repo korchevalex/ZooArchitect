@@ -1,6 +1,6 @@
 package bg.softuni.zooarchitect.controller;
 
-import bg.softuni.zooarchitect.model.dto.UserSignUpDTO;
+import bg.softuni.zooarchitect.model.dto.UserRegisterDTO;
 import bg.softuni.zooarchitect.model.entity.User;
 import bg.softuni.zooarchitect.service.UserService;
 import jakarta.validation.Valid;
@@ -18,27 +18,27 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/sign-up")
+    @GetMapping("/register")
     public String viewSignUp(Model model) {
-        model.addAttribute("userDTO", new UserSignUpDTO());
-        return "sign-up";
+        model.addAttribute("userDTO", new UserRegisterDTO());
+        return "register";
     }
 
     @PostMapping("/sign-up")
-    public String signUp(@Valid @ModelAttribute("userDTO") UserSignUpDTO userSignUpDTO, BindingResult result, Model model) {
+    public String register(@Valid @ModelAttribute("userDTO") UserRegisterDTO userRegisterDTO, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            return "sign-up";
+            return "register";
         }
 
-        if (!userSignUpDTO.getPassword().equals(userSignUpDTO.getConfirmPassword())) {
+        if (!userRegisterDTO.getPassword().equals(userRegisterDTO.getConfirmPassword())) {
             model.addAttribute("passwordMismatch", true);
-            return "sign-up";
+            return "register";
         }
 
         User user = new User();
-        user.setUsername(userSignUpDTO.getUsername());
-        user.setPassword(userSignUpDTO.getPassword());
-        user.setEmail(userSignUpDTO.getEmail());
+        user.setUsername(userRegisterDTO.getUsername());
+        user.setPassword(userRegisterDTO.getPassword());
+        user.setEmail(userRegisterDTO.getEmail());
 
         userService.save(user);
         return "redirect:/login";
