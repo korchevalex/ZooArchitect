@@ -19,4 +19,7 @@ public class User{
 
     @Column(nullable = false)
     private String password;
+
+    @OneToOne(mappedBy = "owner")
+    private Zoo zoo;
 }
