@@ -25,11 +25,4 @@ public class User{
 
     @OneToOne(mappedBy = "owner")
     private Zoo zoo;
-
-    @OneToMany
-    private List<Animal> animals;
-
-    public User() {
-        this.animals = new ArrayList<>();
-    }
 }

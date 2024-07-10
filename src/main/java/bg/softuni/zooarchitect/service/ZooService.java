@@ -26,6 +26,10 @@ public class ZooService {
         zooRepository.save(zoo);
     }
 
+    public Zoo getZooById(long id) {
+        return zooRepository.getReferenceById(id);
+    }
+
     public List<Zoo> getAllZoos() {
         return zooRepository.findAll();
     }

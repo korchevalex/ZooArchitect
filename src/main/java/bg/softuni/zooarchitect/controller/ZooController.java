@@ -5,6 +5,7 @@ import bg.softuni.zooarchitect.model.entity.User;
 import bg.softuni.zooarchitect.model.entity.Zoo;
 import bg.softuni.zooarchitect.service.UserService;
 import bg.softuni.zooarchitect.service.ZooService;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.Authentication;
@@ -12,10 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/zoos")
@@ -34,6 +32,7 @@ public class ZooController {
     public String viewZoos(Model model) {
 
         model.addAttribute("zooList", zooService.getAllZoos());
+        model.addAttribute("zooExists", zooExists());
         return "zoos";
     }
 
@@ -68,5 +67,15 @@ public class ZooController {
         zooService.save(zoo);
 
         return "redirect:/zoos";
+    }
+
+    @GetMapping("/{id}")
+    @Transactional
+    public String viewZooDetails(@PathVariable long id, Model model){
+        Zoo zoo = zooService.getZooById(id);
+        User user = zoo.getOwner();
+        model.addAttribute("zoo", zoo);
+        model.addAttribute("zooOwner", user);
+        return "zoo-details";
     }
 }
