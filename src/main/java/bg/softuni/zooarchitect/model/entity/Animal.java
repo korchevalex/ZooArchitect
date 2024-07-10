@@ -21,4 +21,7 @@ public class Animal {
 
     @ManyToOne
     private Zoo zoo;
+
+    @ManyToOne
+    private User owner;
 }

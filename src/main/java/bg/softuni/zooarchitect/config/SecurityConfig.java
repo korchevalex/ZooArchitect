@@ -17,7 +17,7 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                        .requestMatchers("/", "/users/sign-up", "/users/login", "/webfonts/**", "/sass/**").permitAll()
+                        .requestMatchers("/", "/users/register", "/users/login", "/webfonts/**", "/sass/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(

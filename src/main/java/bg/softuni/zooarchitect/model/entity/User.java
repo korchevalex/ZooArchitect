@@ -3,6 +3,9 @@ package bg.softuni.zooarchitect.model.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 @Entity
 @Table(name = "users")
@@ -22,4 +25,11 @@ public class User{
 
     @OneToOne(mappedBy = "owner")
     private Zoo zoo;
+
+    @OneToMany
+    private List<Animal> animals;
+
+    public User() {
+        this.animals = new ArrayList<>();
+    }
 }

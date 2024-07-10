@@ -24,7 +24,7 @@ public class UserController {
         return "register";
     }
 
-    @PostMapping("/sign-up")
+    @PostMapping("/register")
     public String register(@Valid @ModelAttribute("userDTO") UserRegisterDTO userRegisterDTO, BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "register";

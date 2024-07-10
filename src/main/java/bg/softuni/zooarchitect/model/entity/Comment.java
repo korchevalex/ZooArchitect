@@ -3,6 +3,7 @@ package bg.softuni.zooarchitect.model.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -21,4 +22,8 @@ public class Comment {
 
     @OneToMany
     private List<Comment> replies;
+
+    public Comment() {
+        this.replies = new ArrayList<>();
+    }
 }

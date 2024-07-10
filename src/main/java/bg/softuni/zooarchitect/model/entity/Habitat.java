@@ -18,4 +18,10 @@ public class Habitat {
     private String name;
 
     private String description;
+
+    @Column(nullable = false)
+    private long latitude;
+
+    @Column(nullable = false)
+    private long longitude;
 }

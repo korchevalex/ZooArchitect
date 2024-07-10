@@ -45,12 +45,16 @@
 						<div class="inner">
 							<h2 sec:authorize="isAnonymous()">Zoo Architect</h2>
 							<h2 sec:authorize="isAuthenticated()">Welcome <span sec:authentication="name"></span></h2>
-							<p>Another fine responsive<br />
-							site template freebie<br />
-							crafted by <a href="https://html5up.net">HTML5 UP</a>.</p>
+							<p>Create the zoo of<br />
+							your dreams with<br />
+							Zoo Architect</p>
 							<ul sec:authorize="isAnonymous()" class="actions special">
 								<li><a href="/users/register" class="button primary">Register</a></li>
 								<li><a href="/users/login" class="button primary">Log In</a></li>
+							</ul>
+							<ul sec:authorize="isAuthenticated()" class="actions special">
+								<li><a href="/zoos" class="button primary">Explore zoos</a></li>
+								<li><a href="/zoos/create" class="button primary">Create your own zoo</a></li>
 							</ul>
 						</div>
 						<a href="#one" class="more scrolly">Learn More</a>
