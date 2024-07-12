@@ -28,7 +28,7 @@ public class Zoo {
     @Column(nullable = false)
     private String imageURL;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "zoo")
     private List<Comment> comments;
 
     public Zoo() {

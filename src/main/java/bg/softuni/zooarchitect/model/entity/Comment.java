@@ -14,8 +14,11 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @OneToOne
+    @ManyToOne
     private User author;
+
+    @ManyToOne
+    private Zoo zoo;
 
     @Column(nullable = false)
     private String text;

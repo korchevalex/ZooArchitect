@@ -1,8 +1,10 @@
+
 spring:
   jpa:
     properties:
       hibernate:
         format_sql: 'TRUE'
+
     hibernate:
       ddl-auto: update
     open-in-view: 'false'
