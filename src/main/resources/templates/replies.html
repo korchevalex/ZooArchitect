@@ -47,16 +47,16 @@
         <section class="wrapper style5">
             <div class="inner">
                 <div>
-                    <h3 th:text="*{zoo.getName}">Lorem ipsum dolor</h3>
-                    <p th:text="'Owned by: ' + *{zooOwner.getUsername()}">Vestibulum ultrices risus velit, sit amet blandit massa auctor sit amet. Sed eu lectus sem. Phasellus in odio at ipsum porttitor mollis id vel diam. Praesent sit amet posuere risus, eu faucibus lectus. Vivamus ex ligula, tempus pulvinar ipsum in, auctor porta quam. Proin nec dui cursus, posuere dui eget interdum. Fusce lectus magna, sagittis at facilisis vitae, pellentesque at etiam. Quisque posuere leo quis sem commodo, vel scelerisque nisi scelerisque. Suspendisse id quam vel tortor tincidunt suscipit. Nullam auctor orci eu dolor consectetur, interdum ullamcorper ante tincidunt. Mauris felis nec felis elementum varius.</p>
+                    <h3 th:text="|*{comment.getAuthor().getUsername()} *{comment.getShortTime()}|">Lorem ipsum dolor</h3>
+                    <p th:text="*{comment.getText()}">Vestibulum ultrices risus velit, sit amet blandit massa auctor sit amet. Sed eu lectus sem. Phasellus in odio at ipsum porttitor mollis id vel diam. Praesent sit amet posuere risus, eu faucibus lectus. Vivamus ex ligula, tempus pulvinar ipsum in, auctor porta quam. Proin nec dui cursus, posuere dui eget interdum. Fusce lectus magna, sagittis at facilisis vitae, pellentesque at etiam. Quisque posuere leo quis sem commodo, vel scelerisque nisi scelerisque. Suspendisse id quam vel tortor tincidunt suscipit. Nullam auctor orci eu dolor consectetur, interdum ullamcorper ante tincidunt. Mauris felis nec felis elementum varius.</p>
                 </div>
                 <hr/>
-                <form th:method="POST" th:action="@{/zoos/{id}/comments/create(id=${zoo.getId()})}" th:object="${commentDTO}">
+                <form th:method="POST" th:action="@{/zoos/{id}/comments/{comment_id}/create(id=${zoo.getId()},comment_id=${comment.getId()})}" th:object="${commentDTO}">
                     <div class="row gtr-uniform">
                         <div class="col-12">
                             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-                            <label for="post-comment"></label>
-                            <textarea th:field="*{text}" name="post-comment" id="post-comment" placeholder="Enter your comment" rows="3"></textarea>
+                            <label for="post-reply"></label>
+                            <textarea th:field="*{text}" name="post-reply" id="post-reply" placeholder="Enter your reply" rows="3"></textarea>
                             <div th:if="${#fields.hasErrors('text')}" th:errors="*{text}"></div>
                         </div>
                         <div class="col-12">
@@ -67,11 +67,10 @@
                     </div>
                 </form>
                 <hr/>
-                <div th:each="comment : *{comments}">
+                <div th:each="reply : *{replies}">
                     <div class="col-12">
-                        <h4 th:text="|*{comment.getAuthor().getUsername()} *{comment.getShortTime()}|"></h4>
-                        <p th:text="*{comment.getText()}"></p>
-                        <a th:href="@{/zoos/{id}/comments/{comment_id}(id=${zoo.getId()},comment_id=${comment.getId()})}">View Replies</a>
+                        <h4 th:text="|*{reply.getAuthor().getUsername()} *{reply.getShortTime()}|"></h4>
+                        <p th:text="*{reply.getText()}"></p>
                     </div>
                     <hr/>
                 </div>

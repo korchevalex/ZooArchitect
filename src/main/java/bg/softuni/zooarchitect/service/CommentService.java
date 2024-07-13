@@ -15,4 +15,8 @@ public class CommentService {
     public void save(Comment comment) {
         commentRepository.save(comment);
     }
+
+    public Comment getCommentById(long commentId) {
+        return commentRepository.getReferenceById(commentId);
+    }
 }

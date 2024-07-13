@@ -9,7 +9,6 @@ import bg.softuni.zooarchitect.service.UserService;
 import bg.softuni.zooarchitect.service.ZooService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
-import org.hibernate.Session;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -48,7 +48,6 @@ public class CommentController {
         model.addAttribute("comments", comments);
         model.addAttribute("commentDTO", new CommentCreationDTO());
         model.addAttribute("zooOwner", zoo.getOwner());
-
         return "comments";
     }
 
@@ -67,9 +66,63 @@ public class CommentController {
         Comment comment = modelMapper.map(commentCreationDTO, Comment.class);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUsername(auth.getName());
+        comment.setTime(LocalDateTime.now());
         comment.setAuthor(user);
         comment.setZoo(zoo);
         commentService.save(comment);
         return "redirect:/zoos/" + id + "/comments";
+    }
+
+    @GetMapping("/{comment_id}")
+    @Transactional
+    public String viewReplies(@PathVariable long id, Model model, @PathVariable long comment_id) {
+        Zoo zoo = zooService.getZooById(id);
+        if (zoo == null) {
+            throw new IllegalArgumentException("Invalid zoo id");
+        }
+        Comment comment = commentService.getCommentById(comment_id);
+        if (comment == null) {
+            throw new IllegalArgumentException("Invalid comment id");
+        }
+        List<Comment> replies = comment.getReplies();
+        model.addAttribute("zoo", zoo);
+        model.addAttribute("comment", comment);
+        model.addAttribute("replies", replies);
+        model.addAttribute("commentDTO", new CommentCreationDTO());
+        model.addAttribute("zooOwner", zoo.getOwner());
+
+        return "replies";
+    }
+
+    @PostMapping("/{comment_id}/create")
+    @Transactional
+    public String createReply(
+            @PathVariable long id,
+            @Valid @ModelAttribute("commentDTO") CommentCreationDTO commentCreationDTO,
+            BindingResult bindingResult,
+            @PathVariable long comment_id) {
+        Zoo zoo = zooService.getZooById(id);
+        if (zoo == null) {
+            throw new IllegalArgumentException("Invalid zoo id");
+        }
+        if (bindingResult.hasErrors()) {
+            //noinspection SpringMVCViewInspection
+            return "redirect:/zoos/" + id + "/comments/" + comment_id;
+        }
+        Comment reply = modelMapper.map(commentCreationDTO, Comment.class);
+        Comment originalComment = commentService.getCommentById(comment_id);
+        if (originalComment == null) {
+            throw new IllegalArgumentException("Invalid comment id");
+        }
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByUsername(auth.getName());
+        reply.setAuthor(user);
+        reply.setZoo(zoo);
+        reply.setTime(LocalDateTime.now());
+        originalComment.getReplies().add(reply);
+        commentService.save(reply);
+        commentService.save(originalComment);
+        //noinspection SpringMVCViewInspection
+        return "redirect:/zoos/" + id + "/comments/" + comment_id;
     }
 }
