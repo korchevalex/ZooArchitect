@@ -4,7 +4,9 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -22,8 +24,8 @@ public class Zoo {
     @OneToOne
     private User owner;
 
-    @ManyToMany
-    private List<Animal> animals;
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<Animal> animals;
 
     @Column(nullable = false)
     private String imageURL;
@@ -32,7 +34,7 @@ public class Zoo {
     private List<Comment> comments;
 
     public Zoo() {
-        this.animals = new ArrayList<>();
+        this.animals = new HashSet<>();
         this.comments = new ArrayList<>();
     }
 }

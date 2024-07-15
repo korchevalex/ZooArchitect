@@ -1,7 +1,6 @@
 package bg.softuni.zooarchitect.controller;
 
 import bg.softuni.zooarchitect.model.dto.UserRegisterDTO;
-import bg.softuni.zooarchitect.model.entity.User;
 import bg.softuni.zooarchitect.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -30,17 +29,11 @@ public class UserController {
             return "register";
         }
 
-        if (!userRegisterDTO.getPassword().equals(userRegisterDTO.getConfirmPassword())) {
+        if (!userService.save(userRegisterDTO)) {
             model.addAttribute("passwordMismatch", true);
             return "register";
         }
 
-        User user = new User();
-        user.setUsername(userRegisterDTO.getUsername());
-        user.setPassword(userRegisterDTO.getPassword());
-        user.setEmail(userRegisterDTO.getEmail());
-
-        userService.save(user);
         return "redirect:/login";
     }
 

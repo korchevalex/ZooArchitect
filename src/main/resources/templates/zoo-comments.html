@@ -42,13 +42,12 @@
     <!-- Main -->
     <article id="main">
         <header>
-            <h2><span th:text="*{zooOwner.getUsername()}"></span>'s Zoo</h2>
+            <h2 th:text="*{zoo.getName()}"></h2>
         </header>
         <section class="wrapper style5">
             <div class="inner">
                 <div>
-                    <h3 th:text="*{zoo.getName}">Lorem ipsum dolor</h3>
-                    <p th:text="'Owned by: ' + *{zooOwner.getUsername()}">Vestibulum ultrices risus velit, sit amet blandit massa auctor sit amet. Sed eu lectus sem. Phasellus in odio at ipsum porttitor mollis id vel diam. Praesent sit amet posuere risus, eu faucibus lectus. Vivamus ex ligula, tempus pulvinar ipsum in, auctor porta quam. Proin nec dui cursus, posuere dui eget interdum. Fusce lectus magna, sagittis at facilisis vitae, pellentesque at etiam. Quisque posuere leo quis sem commodo, vel scelerisque nisi scelerisque. Suspendisse id quam vel tortor tincidunt suscipit. Nullam auctor orci eu dolor consectetur, interdum ullamcorper ante tincidunt. Mauris felis nec felis elementum varius.</p>
+                    <h3 th:text="'Owned by: ' + *{zooOwner.getUsername()}">Lorem ipsum dolor</h3>
                 </div>
                 <hr/>
                 <form th:method="POST" th:action="@{/zoos/{id}/comments/create(id=${zoo.getId()})}" th:object="${commentDTO}">

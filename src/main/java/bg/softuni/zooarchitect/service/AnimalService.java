@@ -26,4 +26,8 @@ public class AnimalService {
     public List<Animal> getAllAnimals() {
         return animalRepository.findAll();
     }
+
+    public Animal getAnimalById(long id) {
+        return animalRepository.getReferenceById(id);
+    }
 }

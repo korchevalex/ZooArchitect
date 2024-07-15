@@ -7,7 +7,7 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Zoo Visit</title>
+    <title>Explore Animals</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="/css/main.css" />
@@ -20,41 +20,17 @@
 
     <!-- Header -->
     <header th:replace="~{fragments/header.html}" id="header">
-        <h1><a href="index.html">Spectral</a></h1>
-        <nav id="nav">
-            <ul>
-                <li class="special">
-                    <a href="#menu" class="menuToggle"><span>Menu</span></a>
-                    <div id="menu">
-                        <ul>
-                            <li><a href="index.html">Home</a></li>
-                            <li><a href="generic.html">Generic</a></li>
-                            <li><a href="elements.html">Elements</a></li>
-                            <li><a href="#">Sign Up</a></li>
-                            <li><a href="#">Log In</a></li>
-                        </ul>
-                    </div>
-                </li>
-            </ul>
-        </nav>
     </header>
 
     <!-- Main -->
     <article id="main">
         <header>
-            <h2 th:text="*{zoo.getName()}"></h2>
+            <h2>Add animal to <span th:text="*{zoo.getName()}"></span></h2>
         </header>
         <section class="wrapper style5">
             <div class="inner">
-                <div>
-                    <h3 th:text="'Owned by: ' + *{zooOwner.getUsername()}">Lorem ipsum dolor</h3>
-                </div>
-                <ul class="actions special">
-                    <li><a th:href="@{/zoos/{id}/animals/add(id=*{zoo.getId()})}" class="button primary">Add animal</a></li>
-                </ul>
-                <hr/>
                 <div th:each="animal : ${animalList}">
-                    <h3 th:text="*{animal.getName}">Lorem ipsum dolor</h3>
+                    <h3 th:text="*{animal.getName()}">Lorem ipsum dolor</h3>
                     <div class="box alt">
                         <div class="row gtr-50 gtr-uniform">
                             <div class="col-4">
@@ -64,6 +40,9 @@
                             </div>
                             <div class="col-8">
                                 <p th:text="*{animal.getDescription()}"></p>
+                                <form th:action="@{/zoos/{zoo_id}/animals/add/{animal_id}(zoo_id=*{zoo.getId()},animal_id=*{animal.getId()})}" th:method="Post">
+                                    <button class="button primary">Select</button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -75,16 +54,6 @@
 
     <!-- Footer -->
     <footer th:replace="~{fragments/footer.html}" id="footer">
-        <ul class="icons">
-            <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-            <li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-            <li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-            <li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
-            <li><a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
-        </ul>
-        <ul class="copyright">
-            <li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
-        </ul>
     </footer>
 
 </div>

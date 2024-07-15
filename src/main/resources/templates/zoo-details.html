@@ -5,7 +5,6 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 	  xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<title>Zoo Visit</title>
@@ -43,14 +42,24 @@
 				<!-- Main -->
 					<article id="main">
 						<header>
-							<h2 ><span th:text="*{zooOwner.getUsername()}"></span>'s Zoo</h2>
+							<h2 th:text="*{zoo.getName()}"></h2>
 						</header>
 						<section class="wrapper style5">
 							<div class="inner">
+								<div th:if="${userOwnsZoo}">
+									<ul class="actions special">
+										<li>
+											<form th:method="Delete" th:action="@{/zoos/{id}/delete(id=*{zoo.getId()})}">
+												<button>
+													Delete Zoo
+												</button>
+											</form>
+										</li>
+									</ul>
+									<hr />
+								</div>
 								<div>
-									<h3 th:text="*{zoo.getName}">Lorem ipsum dolor</h3>
 									<p><span class="image fit"><img th:src="*{zoo.getImageURL()}" alt="Zoo image" /></span><span th:text="*{zoo.getDescription()}"></span></p>
-
 									<p th:text="'Owned by: ' + *{zooOwner.getUsername()}">Vestibulum ultrices risus velit, sit amet blandit massa auctor sit amet. Sed eu lectus sem. Phasellus in odio at ipsum porttitor mollis id vel diam. Praesent sit amet posuere risus, eu faucibus lectus. Vivamus ex ligula, tempus pulvinar ipsum in, auctor porta quam. Proin nec dui cursus, posuere dui eget interdum. Fusce lectus magna, sagittis at facilisis vitae, pellentesque at etiam. Quisque posuere leo quis sem commodo, vel scelerisque nisi scelerisque. Suspendisse id quam vel tortor tincidunt suscipit. Nullam auctor orci eu dolor consectetur, interdum ullamcorper ante tincidunt. Mauris felis nec felis elementum varius.</p>
 									<p><a th:href="@{/zoos/{id}/animals(id=*{zoo.getId})}">View animals</a></p>
 									<p><a th:href="@{/zoos/{id}/comments(id=*{zoo.getId})}">View comments</a></p>
