@@ -18,10 +18,4 @@ public class Animal {
 
     @Column(nullable = false)
     private String imageURL;
-
-    @ManyToOne
-    private Zoo zoo;
-
-    @ManyToOne
-    private User owner;
 }

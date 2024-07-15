@@ -16,6 +16,7 @@
                         <li sec:authorize="isAnonymous()"><a th:href="@{/users/register}">Register</a></li>
                         <li sec:authorize="isAnonymous()"><a th:href="@{/users/login}">Log In</a></li>
                         <li sec:authorize="isAuthenticated()"><a th:href="@{/zoos}">Explore Zoos</a></li>
+                        <li sec:authorize="isAuthenticated()"><a th:href="@{/animals}">Explore Animals</a></li>
                         <li sec:authorize="isAuthenticated()">
                             <form th:method="POST" th:action="@{/users/logout}">
                                 <button class="button fit">Logout</button>

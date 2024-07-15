@@ -48,7 +48,7 @@ public class CommentController {
         model.addAttribute("comments", comments);
         model.addAttribute("commentDTO", new CommentCreationDTO());
         model.addAttribute("zooOwner", zoo.getOwner());
-        return "comments";
+        return "zoo-comments";
     }
 
     @PostMapping("/create")
@@ -61,6 +61,7 @@ public class CommentController {
             throw new IllegalArgumentException("Invalid zoo id");
         }
         if (bindingResult.hasErrors()) {
+            //noinspection SpringMVCViewInspection
             return "redirect:/zoos/" + id + "/comments";
         }
         Comment comment = modelMapper.map(commentCreationDTO, Comment.class);
@@ -70,6 +71,7 @@ public class CommentController {
         comment.setAuthor(user);
         comment.setZoo(zoo);
         commentService.save(comment);
+        //noinspection SpringMVCViewInspection
         return "redirect:/zoos/" + id + "/comments";
     }
 
@@ -91,7 +93,7 @@ public class CommentController {
         model.addAttribute("commentDTO", new CommentCreationDTO());
         model.addAttribute("zooOwner", zoo.getOwner());
 
-        return "replies";
+        return "zoo-comments-replies";
     }
 
     @PostMapping("/{comment_id}/create")

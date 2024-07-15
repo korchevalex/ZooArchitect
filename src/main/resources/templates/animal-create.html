@@ -1,1 +1,64 @@
-<!-- TODO -->
+<!DOCTYPE HTML>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Zoo creation</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <noscript><link rel="stylesheet" href="/css/noscript.css" /></noscript>
+</head>
+<body class="landing is-preload">
+
+<!-- Page Wrapper -->
+<div id="page-wrapper">
+
+    <!-- Header -->
+    <header th:replace="~{fragments/header.html}" id="header" class="alt"></header>
+
+    <article id="main">
+        <header>
+            <h2>Create an animal</h2>
+        </header>
+        <section class="wrapper style5">
+            <div class="inner">
+                <form th:method="post" th:action="@{/animals/create}" th:object="${animalDTO}">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                    <div class="row gtr-uniform">
+                        <div class="col-6 col-12-xsmall">
+                            <label for="name"></label>
+                            <input th:field="*{name}" type="text" name="name" id="name" value="" placeholder="Name" />
+                            <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+                        </div>
+                        <div class="col-6 col-12-xsmall">
+                            <label for="imageURL"></label>
+                            <input th:field="*{imageURL}" type="text" name="imageURL" id="imageURL" value="" placeholder="Image URL" />
+                            <div th:if="${#fields.hasErrors('imageURL')}" th:errors="*{imageURL}"></div>
+                        </div>
+                        <div class="col-12">
+                            <label for="description"></label>
+                            <textarea th:field="*{description}" name="description" id="description" placeholder="Description" rows="4"></textarea>
+                        </div>
+                        <div class="col-12">
+                            <ul class="actions">
+                                <li><input type="submit" value="Create" class="primary" /></li>
+                            </ul>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </article>
+    <footer th:replace="~{fragments/footer.html}" id="footer"></footer>
+</div>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.scrollex.min.js"></script>
+<script src="/js/jquery.scrolly.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
+</body>
+</html>

@@ -22,7 +22,7 @@ public class Zoo {
     @OneToOne
     private User owner;
 
-    @OneToMany(mappedBy = "zoo")
+    @ManyToMany
     private List<Animal> animals;
 
     @Column(nullable = false)
