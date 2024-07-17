@@ -53,6 +53,11 @@
                     </div>
                     <hr />
                 </div>
+                <div th:if="*{animalList.isEmpty()}">
+                    <ul class="actions special">
+                        <li><p>There are no animals yet. <a th:href="@{/animals/create}">Create the first one.</a></p></li>
+                    </ul>
+                </div>
             </div>
         </section>
     </article>

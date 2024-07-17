@@ -49,6 +49,11 @@
                     </div>
                     <hr />
                 </div>
+                <div th:if="*{habitatList.isEmpty()}">
+                    <ul class="actions special">
+                        <li><p>There are no habitats yet. <a th:href="@{/habitats/create}">Create the first one.</a></p></li>
+                    </ul>
+                </div>
             </div>
         </section>
     </article>

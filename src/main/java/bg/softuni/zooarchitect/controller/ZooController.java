@@ -110,6 +110,9 @@ public class ZooController {
     public String redirectToUserZoo() {
         User user = userService.getCurrentUser();
         Zoo zoo = user.getZoo();
+        if (zoo == null) {
+            return "redirect:/zoos";
+        }
         return "redirect:/zoos/" + zoo.getId();
     }
 }
