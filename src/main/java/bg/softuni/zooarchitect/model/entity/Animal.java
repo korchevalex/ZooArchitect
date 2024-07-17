@@ -14,8 +14,16 @@ public class Animal {
     @Column(nullable = false)
     private String name;
 
+    @Column(columnDefinition = "TEXT")
     private String description;
 
     @Column(nullable = false)
     private String imageURL;
+
+    @ManyToOne
+    private Habitat habitat;
+
+    public boolean hasHabitat() {
+        return this.habitat != null;
+    }
 }

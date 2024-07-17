@@ -5,6 +5,6 @@ import lombok.Data;
 
 @Data
 public class CommentCreationDTO {
-    @NotBlank
+    @NotBlank(message = "Text is mandatory")
     private String text;
 }

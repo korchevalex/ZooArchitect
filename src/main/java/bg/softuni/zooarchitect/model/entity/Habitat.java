@@ -11,7 +11,6 @@ public class Habitat {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false)
     private double temperature;
 
     @Column(nullable = false)
@@ -20,8 +19,13 @@ public class Habitat {
     private String description;
 
     @Column(nullable = false)
-    private long latitude;
+    private double latitude;
 
     @Column(nullable = false)
-    private long longitude;
+    private double longitude;
+
+    @Column(nullable = false)
+    private String imageURL;
+
+    private String weatherCondition;
 }

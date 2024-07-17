@@ -7,7 +7,7 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Explore Animals</title>
+    <title>Explore Habitats</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="/css/main.css" />
@@ -25,29 +25,28 @@
     <!-- Main -->
     <article id="main">
         <header>
-            <h2>Explore all animals</h2>
+            <h2>Explore all habitats</h2>
         </header>
         <section class="wrapper style5">
             <div class="inner">
                 <div>
                     <ul class="actions special">
-                        <li><a th:href="@{/animals/create}" class="button primary">Create An Animal</a></li>
+                        <li><a th:href="@{/habitats/create}" class="button primary">Create A Habitat</a></li>
                     </ul>
                     <hr />
                 </div>
-                <div th:each="animal : ${animalList}">
-                    <h3 th:text="*{animal.getName}">Lorem ipsum dolor</h3>
+                <div th:each="habitat : ${habitatList}">
+                    <h3 th:text="*{habitat.getName}">Lorem ipsum dolor</h3>
                     <div class="box alt">
                         <div class="row gtr-50 gtr-uniform">
                             <div class="col-4">
                                 <span class="image fit">
-                                    <img th:src="*{animal.getImageURL()}" alt="Animal image" />
+                                    <img th:src="*{habitat.getImageURL()}" alt="Habitat image" />
                                 </span>
                             </div>
                             <div class="col-8">
-                                <p th:text="*{animal.description}"></p>
-                                <a th:if="*{animal.hasHabitat()}" th:href="@{/animals/{id}/habitat(id=*{animal.getId()})}">See Habitat</a>
-                                <a th:unless="*{animal.hasHabitat()}" th:href="@{/animals/{id}/habitat/select(id=*{animal.getId()})}">Select Habitat</a>
+                                <p th:text="|*{habitat.getTemperature()}C *{habitat.getWeatherCondition()}|"></p>
+                                <p th:text="*{habitat.getDescription()}"></p>
                             </div>
                         </div>
                     </div>

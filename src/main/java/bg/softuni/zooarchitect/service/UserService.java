@@ -23,7 +23,7 @@ public class UserService  {
     }
 
     public boolean save(UserRegisterDTO userRegisterDTO) {
-        if (userRegisterDTO.getPassword().equals(userRegisterDTO.getConfirmPassword())) {
+        if (!userRegisterDTO.getPassword().equals(userRegisterDTO.getConfirmPassword())) {
             return false;
         }
         User user = modelMapper.map(userRegisterDTO, User.class);

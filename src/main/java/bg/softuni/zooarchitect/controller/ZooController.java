@@ -1,6 +1,7 @@
 package bg.softuni.zooarchitect.controller;
 
 import bg.softuni.zooarchitect.model.dto.ZooCreationDTO;
+import bg.softuni.zooarchitect.model.entity.User;
 import bg.softuni.zooarchitect.model.entity.Zoo;
 import bg.softuni.zooarchitect.service.AnimalService;
 import bg.softuni.zooarchitect.service.UserService;
@@ -102,5 +103,13 @@ public class ZooController {
         model.addAttribute("zooOwner", zoo.getOwner());
         model.addAttribute("animalList", zoo.getAnimals());
         return "zoo-animals";
+    }
+
+    @GetMapping("/my")
+    @Transactional
+    public String redirectToUserZoo() {
+        User user = userService.getCurrentUser();
+        Zoo zoo = user.getZoo();
+        return "redirect:/zoos/" + zoo.getId();
     }
 }

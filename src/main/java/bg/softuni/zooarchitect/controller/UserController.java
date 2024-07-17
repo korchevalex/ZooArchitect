@@ -18,7 +18,7 @@ public class UserController {
     }
 
     @GetMapping("/register")
-    public String viewSignUp(Model model) {
+    public String viewRegister(Model model) {
         model.addAttribute("userDTO", new UserRegisterDTO());
         return "register";
     }
