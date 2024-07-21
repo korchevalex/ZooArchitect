@@ -19,4 +19,9 @@ public class HomeController {
     public String viewElements() {
         return "elements";
     }
+
+    @GetMapping("/about")
+    public String viewAbout() {
+        return "about";
+    }
 }
