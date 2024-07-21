@@ -30,6 +30,7 @@
                                     <label for="username"></label>
                                     <input th:field="*{username}" type="text" name="username" id="username" value="" placeholder="Username" />
                                     <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+                                    <div th:if="${usernameIsTaken}" class="text-danger">Username is already in use.</div>
                                 </div>
                                 <div class="col-6 col-12-xsmall">
                                     <label for="password"></label>
@@ -40,6 +41,7 @@
                                     <label for="email"></label>
                                     <input th:field="*{email}" type="email" name="email" id="email" value="" placeholder="Email" />
                                     <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+                                    <div th:if="${emailIsTaken}" class="text-danger">Email is already in use.</div>
                                 </div>
                                 <div class="col-6 col-12-xsmall">
                                     <label for="confirm-password"></label>

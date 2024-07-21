@@ -40,4 +40,12 @@ public class UserService  {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         return this.findUserByUsername(auth.getName());
     }
+
+    public boolean usernameIsTaken(UserRegisterDTO userRegisterDTO) {
+        return userRepository.findByUsername(userRegisterDTO.getUsername()).isPresent();
+    }
+
+    public boolean emailIsTaken(UserRegisterDTO userRegisterDTO) {
+        return userRepository.findByEmail(userRegisterDTO.getEmail()).isPresent();
+    }
 }

@@ -25,12 +25,24 @@ public class UserController {
 
     @PostMapping("/register")
     public String register(@Valid @ModelAttribute("userDTO") UserRegisterDTO userRegisterDTO, BindingResult result, Model model) {
-        if (result.hasErrors()) {
-            return "register";
+        boolean hasErrors = result.hasErrors();
+
+        if (userService.usernameIsTaken(userRegisterDTO)) {
+            model.addAttribute("usernameIsTaken", true);
+            hasErrors = true;
+        }
+
+        if (userService.emailIsTaken(userRegisterDTO)) {
+            model.addAttribute("emailIsTaken", true);
+            hasErrors = true;
         }
 
         if (!userService.save(userRegisterDTO)) {
             model.addAttribute("passwordMismatch", true);
+            hasErrors = true;
+        }
+
+        if (hasErrors) {
             return "register";
         }
 
