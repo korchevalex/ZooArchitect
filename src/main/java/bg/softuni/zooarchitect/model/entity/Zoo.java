@@ -19,6 +19,7 @@ public class Zoo {
     @Column(nullable = false)
     String name;
 
+    @Column(columnDefinition = "TEXT")
     String description;
 
     @OneToOne

@@ -111,7 +111,7 @@ public class ZooController {
         User user = userService.getCurrentUser();
         Zoo zoo = user.getZoo();
         if (zoo == null) {
-            return "redirect:/zoos";
+            return "redirect:/zoos/create";
         }
         return "redirect:/zoos/" + zoo.getId();
     }
