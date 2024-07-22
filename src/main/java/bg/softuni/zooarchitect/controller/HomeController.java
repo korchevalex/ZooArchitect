@@ -10,11 +10,6 @@ public class HomeController {
         return "index";
     }
 
-    @GetMapping("/generic")
-    public String viewGeneric() {
-        return "generic";
-    }
-
     @GetMapping("/elements")
     public String viewElements() {
         return "elements";

@@ -10,15 +10,14 @@
                 <a href="#menu" class="menuToggle"><span>Menu</span></a>
                 <div id="menu">
                     <ul>
-                        <li sec:authorize="isAuthenticated()"><a th:href="@{/generic}">Generic</a></li>
                         <li sec:authorize="isAuthenticated()"><a th:href="@{/elements}">Elements</a></li>
-                        <li sec:authorize="isAnonymous()"><a th:text="#{nav_bar_register}" th:href="@{/users/register}">Register</a></li>
-                        <li sec:authorize="isAnonymous()"><a th:text="#{nav_bar_login}" th:href="@{/users/login}">Log In</a></li>
-                        <li sec:authorize="isAuthenticated()"><a th:text="#{nav_bar_explore_zoos}" th:href="@{/zoos}">Explore Zoos</a></li>
+                        <li sec:authorize="isAnonymous()"><a th:text="#{register}" th:href="@{/users/register}">Register</a></li>
+                        <li sec:authorize="isAnonymous()"><a th:text="#{login}" th:href="@{/users/login}">Log In</a></li>
+                        <li sec:authorize="isAuthenticated()"><a th:text="#{explore_zoos}" th:href="@{/zoos}">Explore Zoos</a></li>
                         <li sec:authorize="isAuthenticated()"><a th:text="#{nav_bar_my_zoo}" th:href="@{/zoos/my}">My Zoo</a></li>
-                        <li sec:authorize="isAuthenticated()"><a th:text="#{nav_bar_explore_animals}" th:href="@{/animals}">Explore Animals</a></li>
-                        <li sec:authorize="isAuthenticated()"><a th:text="#{nav_bar_explore_habitats}" th:href="@{/habitats}">Explore Habitats</a></li>
-                        <li><a th:text="#{nav_bar_about_us}" th:href="@{/about}">About Us</a></li>
+                        <li sec:authorize="isAuthenticated()"><a th:text="#{explore_animals}" th:href="@{/animals}">Explore Animals</a></li>
+                        <li sec:authorize="isAuthenticated()"><a th:text="#{explore_habitats}" th:href="@{/habitats}">Explore Habitats</a></li>
+                        <li><a th:text="#{about_us}" th:href="@{/about}">About Us</a></li>
                         <li>
                             <form th:method="get">
                                 <label class="text-white" for="lang" th:text="#{nav_bar_language}">Language</label>
