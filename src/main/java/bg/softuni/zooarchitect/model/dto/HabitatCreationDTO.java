@@ -2,7 +2,6 @@ package bg.softuni.zooarchitect.model.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
@@ -15,11 +14,9 @@ public class HabitatCreationDTO {
     private String description;
 
     @NotNull(message = "Latitude is mandatory")
-    @PositiveOrZero(message = "Latitude must be valid")
     private Double latitude;
 
     @NotNull(message = "Longitude is mandatory")
-    @PositiveOrZero(message = "Longitude must be valid")
     private Double longitude;
 
     @NotBlank(message = "Image URL is mandatory")
