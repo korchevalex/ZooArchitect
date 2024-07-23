@@ -30,7 +30,7 @@
         <section class="wrapper style5">
             <div class="inner">
                 <div>
-                    <h3 th:text="'Owned by: ' + *{zooOwner.getUsername()}">Lorem ipsum dolor</h3>
+                    <h3 th:text="'Owned by: ' + *{zoo.getOwner().getUsername()}">Lorem ipsum dolor</h3>
                 </div>
                 <hr/>
                 <form th:method="POST" th:action="@{/zoos/{id}/comments/create(id=${zoo.getId()})}" th:object="${commentDTO}">

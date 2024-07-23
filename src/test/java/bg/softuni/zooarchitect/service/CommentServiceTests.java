@@ -1,6 +1,7 @@
 package bg.softuni.zooarchitect.service;
 
 import bg.softuni.zooarchitect.model.dto.CommentCreationDTO;
+import bg.softuni.zooarchitect.model.dto.CommentDTO;
 import bg.softuni.zooarchitect.model.entity.Comment;
 import bg.softuni.zooarchitect.model.entity.User;
 import bg.softuni.zooarchitect.model.entity.Zoo;
@@ -18,8 +19,11 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -115,5 +119,32 @@ public class CommentServiceTests {
         assertEquals(zoo, reply.getZoo());
         assertEquals(LocalDateTime.now().getYear(), reply.getTime().getYear());  // check time roughly
         assertEquals(reply, originalComment.getReplies().get(0));
+    }
+
+    @Test
+    void testGetCommentDTOById() {
+        long commentId = 1L;
+
+        Comment comment = new Comment();
+        comment.setId(commentId);
+        comment.setText("This is a comment.");
+        List<Comment> replies = new ArrayList<>();
+        Comment reply1 = new Comment();
+        reply1.setId(2L);
+        reply1.setText("This is a reply.");
+        replies.add(reply1);
+        comment.setReplies(replies);
+
+        when(commentRepository.getReferenceById(commentId)).thenReturn(comment);
+        when(modelMapper.map(comment, CommentDTO.class)).thenReturn(new CommentDTO());
+        when(modelMapper.map(reply1, CommentDTO.class)).thenReturn(new CommentDTO());
+
+        CommentDTO result = commentService.getCommentDTOById(commentId);
+
+        assertNotNull(result);
+        assertEquals(1, result.getReplies().size());
+        verify(commentRepository, times(1)).getReferenceById(commentId);
+        verify(modelMapper, times(1)).map(comment, CommentDTO.class);
+        verify(modelMapper, times(1)).map(reply1, CommentDTO.class);
     }
 }

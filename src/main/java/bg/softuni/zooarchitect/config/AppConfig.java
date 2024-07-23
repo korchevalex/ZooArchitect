@@ -1,6 +1,6 @@
 package bg.softuni.zooarchitect.config;
 
-import bg.softuni.zooarchitect.repository.AnimalRepository;
+import bg.softuni.zooarchitect.repository.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,12 +19,12 @@ public class AppConfig {
 
     @Bean
     public DataSourceInitializer dataSourceInitializer(DataSource dataSource,
-                                                       AnimalRepository animalRepository,
+                                                       UserRepository userRepository,
                                                        ResourceLoader resourceLoader) {
         DataSourceInitializer initializer = new DataSourceInitializer();
         initializer.setDataSource(dataSource);
 
-        if (animalRepository.count() == 0) {
+        if (userRepository.count() == 0) {
             ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
             populator.addScript(resourceLoader.getResource("classpath:data.sql"));
             initializer.setDatabasePopulator(populator);

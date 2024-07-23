@@ -1,6 +1,7 @@
 package bg.softuni.zooarchitect.controller;
 
 import bg.softuni.zooarchitect.model.dto.ZooCreationDTO;
+import bg.softuni.zooarchitect.model.dto.ZooDTO;
 import bg.softuni.zooarchitect.model.entity.User;
 import bg.softuni.zooarchitect.model.entity.Zoo;
 import bg.softuni.zooarchitect.service.AnimalService;
@@ -98,10 +99,9 @@ public class ZooController {
     @GetMapping("/{id}/animals")
     @Transactional
     public String viewZooAnimals(@PathVariable long id, Model model) {
-        Zoo zoo = zooService.getZooById(id);
-        model.addAttribute("zoo", zoo);
-        model.addAttribute("zooOwner", zoo.getOwner());
-        model.addAttribute("animalList", zoo.getAnimals());
+        ZooDTO zooDTO = zooService.getZooDTOById(id);
+        model.addAttribute("zoo", zooDTO);
+        model.addAttribute("animalList", zooDTO.getAnimals());
         return "zoo-animals";
     }
 

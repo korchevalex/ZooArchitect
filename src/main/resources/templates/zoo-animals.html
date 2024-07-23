@@ -30,7 +30,7 @@
         <section class="wrapper style5">
             <div class="inner">
                 <div>
-                    <h3 th:text="'Owned by: ' + *{zooOwner.getUsername()}">Lorem ipsum dolor</h3>
+                    <h3 th:text="'Owned by: ' + *{zoo.getOwner().getUsername()}">Lorem ipsum dolor</h3>
                 </div>
                 <ul class="actions special">
                     <li><a th:href="@{/zoos/{id}/animals/add(id=*{zoo.getId()})}" class="button primary">Add animal</a></li>

@@ -50,14 +50,14 @@
                     </div>
                 </form>
                 <hr/>
-                <div th:each="reply : *{replies}">
+                <div th:each="reply : *{comment.getReplies()}">
                     <div class="col-12">
                         <h4 th:text="|*{reply.getAuthor().getUsername()} *{reply.getShortTime()}|"></h4>
                         <p th:text="*{reply.getText()}"></p>
                     </div>
                     <hr/>
                 </div>
-                <div th:if="*{replies.isEmpty()}">
+                <div th:if="*{comment.getReplies.isEmpty()}">
                     <ul class="actions special">
                         <li><p>There are no replies yet. Be the first to reply.</p></li>
                     </ul>

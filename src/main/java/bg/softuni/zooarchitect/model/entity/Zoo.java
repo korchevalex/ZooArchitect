@@ -1,14 +1,16 @@
 package bg.softuni.zooarchitect.model.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "zoos")
 public class Zoo {
@@ -25,17 +27,18 @@ public class Zoo {
     @OneToOne
     private User owner;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     private Set<Animal> animals;
 
     @Column(nullable = false)
     private String imageURL;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "zoo")
+    @OneToMany(mappedBy = "zoo")
     private List<Comment> comments;
 
     public Zoo() {
         this.animals = new HashSet<>();
         this.comments = new ArrayList<>();
     }
+
 }

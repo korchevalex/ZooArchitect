@@ -3,9 +3,13 @@ package bg.softuni.zooarchitect.model.dto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
 public class HabitatCreationDTO {
     @NotBlank(message = "Name is mandatory")
     @Size(min = 2, max = 50, message = "Name must be between 2 and 50 characters")

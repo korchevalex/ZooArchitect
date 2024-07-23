@@ -100,7 +100,7 @@
 								<p th:text="#{index_cta_p}">Connect with fellow zookeepers, share tips, and stay updated on the latest features and events.</p>
 							</header>
 							<ul class="actions stacked">
-								<li><a th:text="#{register}" th:href="@{/users/register}" class="button fit primary">Register</a></li>
+								<li><a sec:authorize="isAnonymous()" th:text="#{register}" th:href="@{/users/register}" class="button fit primary">Register</a></li>
 								<li><a th:text="#{about_us}" th:href="@{/about}" class="button fit">About Us</a></li>
 							</ul>
 						</div>

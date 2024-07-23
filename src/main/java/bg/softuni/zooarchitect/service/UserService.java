@@ -1,8 +1,11 @@
 package bg.softuni.zooarchitect.service;
 
 import bg.softuni.zooarchitect.model.dto.UserRegisterDTO;
+import bg.softuni.zooarchitect.model.entity.Role;
 import bg.softuni.zooarchitect.model.entity.User;
+import bg.softuni.zooarchitect.repository.RoleRepository;
 import bg.softuni.zooarchitect.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -10,24 +13,41 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
+
 @Service
 public class UserService  {
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;
+    private final RoleRepository roleRepository;
 
-    public UserService(UserRepository userRepository, ModelMapper modelMapper, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository, ModelMapper modelMapper, PasswordEncoder passwordEncoder, RoleRepository roleRepository) {
         this.userRepository = userRepository;
         this.modelMapper = modelMapper;
         this.passwordEncoder = passwordEncoder;
+        this.roleRepository = roleRepository;
     }
 
+    @Transactional
     public boolean save(UserRegisterDTO userRegisterDTO) {
         if (!userRegisterDTO.getPassword().equals(userRegisterDTO.getConfirmPassword())) {
             return false;
         }
         User user = modelMapper.map(userRegisterDTO, User.class);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+        Optional<Role> roleOptional = roleRepository.findByName("USER");
+        if (roleOptional.isPresent()) {
+            Set<Role> roles = new HashSet<>();
+            roles.add(roleOptional.get());
+            user.setRoles(roles);
+        } else {
+            throw new RuntimeException("Default role not found");
+        }
+
         userRepository.save(user);
         return true;
     }

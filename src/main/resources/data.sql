@@ -1,3 +1,7 @@
+insert into zoo_architect.roles (id, name)
+values (1, 'USER'),
+       (2, 'ADMIN');
+
 insert into zoo_architect.habitats (id, description, imageurl, latitude, longitude, name, temperature, weather_condition)
 values  (1, 'Grassland habitats are places that receive more rain than deserts but less precipitation than forests. Most of the plants here are grasses, which don’t need as much water as forest vegetation.', 'https://i.natgeofe.com/k/ae89549c-6b2d-4972-a6ec-752a72f7cf33/grassland-lion-pride.jpg?wp=1&w=2154&h=1212', 37.739279, -101.193689, 'Grasslands', 0, null),
         (2, 'Polar habitats cover the top and bottom of planet Earth at the North and South Poles. The North Pole is surrounded by the Arctic Ocean. There isn’t any land here, just a group of continually shifting ice sheets. Parts of Canada and Greenland are near the North Pole. The South Pole is located on Antarctica. This area has land, but it’s completely covered with a layer of ice that’s almost three miles thick in some places.', 'https://i.natgeofe.com/k/88de42b8-764c-40d2-89ee-e72d55dc95b8/emperor-penguin-chicks.jpg?wp=1&w=718&h=404', 71.711995, -111.482985, 'Polar', 0, null),
@@ -62,6 +66,10 @@ values  (1, 'Amur leopards love climbing, exploring, and playing with new things
 
 insert into zoo_architect.users (id, email, password, username)
 values  (1, 'alex@ander.com', '$2a$10$YwJjbrl07O3KE.hudi0sQOyteKvnltZQ20z0kZJyHEiy8/QcJbImW', 'Alexander');
+
+insert into zoo_architect.users_roles (user_id, role_id)
+values  (1, 1),
+        (1, 2);
 
 insert into zoo_architect.zoos (id, description, imageurl, name, owner_id)
 values  (1, 'San Diego Zoo Wildlife Alliance is an international, nonprofit conservation organization with two front doors. We integrate wildlife health and care, science, and education to develop sustainable conservation solutions. Conservation is at the heart of everything we do. And it starts with that connection we make with people and wildlife every day. Because when wildlife thrives, all life thrives.', 'https://blairbirding.com/wp-content/uploads/2017/02/sandiegozoo.jpg', 'San Diego Zoo', 1);

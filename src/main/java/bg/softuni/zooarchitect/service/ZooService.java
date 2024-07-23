@@ -1,6 +1,8 @@
 package bg.softuni.zooarchitect.service;
 
+import bg.softuni.zooarchitect.model.dto.CommentDTO;
 import bg.softuni.zooarchitect.model.dto.ZooCreationDTO;
+import bg.softuni.zooarchitect.model.dto.ZooDTO;
 import bg.softuni.zooarchitect.model.entity.User;
 import bg.softuni.zooarchitect.model.entity.Zoo;
 import bg.softuni.zooarchitect.repository.ZooRepository;
@@ -58,5 +60,14 @@ public class ZooService {
         Zoo zoo = zooRepository.getReferenceById(zooId);
         zoo.getAnimals().add(animalService.getAnimalById(animalId));
         zooRepository.save(zoo);
+    }
+
+    @Transactional
+    public ZooDTO getZooDTOById(long id) {
+        Zoo zoo = zooRepository.getReferenceById(id);
+        List<CommentDTO> commentDTOList = zoo.getComments().stream().map(c -> modelMapper.map(c, CommentDTO.class)).toList();
+        ZooDTO zooDTO = modelMapper.map(zoo, ZooDTO.class);
+        zooDTO.setComments(commentDTOList);
+        return zooDTO;
     }
 }

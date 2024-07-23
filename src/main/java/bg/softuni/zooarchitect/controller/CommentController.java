@@ -1,7 +1,8 @@
 package bg.softuni.zooarchitect.controller;
 
 import bg.softuni.zooarchitect.model.dto.CommentCreationDTO;
-import bg.softuni.zooarchitect.model.entity.Comment;
+import bg.softuni.zooarchitect.model.dto.CommentDTO;
+import bg.softuni.zooarchitect.model.dto.ZooDTO;
 import bg.softuni.zooarchitect.model.entity.Zoo;
 import bg.softuni.zooarchitect.service.CommentService;
 import bg.softuni.zooarchitect.service.ZooService;
@@ -11,8 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Controller
 @RequestMapping("/zoos/{id}/comments")
@@ -26,15 +25,11 @@ public class CommentController {
     }
 
     @GetMapping("")
-    @Transactional
     public String viewComments(@PathVariable long id, Model model) {
-        Zoo zoo = zooService.getZooById(id);
-
-        List<Comment> comments = zoo.getComments();
-        model.addAttribute("zoo", zoo);
-        model.addAttribute("comments", comments);
+        ZooDTO zooDTO = zooService.getZooDTOById(id);
+        model.addAttribute("zoo", zooDTO);
+        model.addAttribute("comments", zooDTO.getComments());
         model.addAttribute("commentDTO", new CommentCreationDTO());
-        model.addAttribute("zooOwner", zoo.getOwner());
         return "zoo-comments";
     }
 
@@ -57,16 +52,12 @@ public class CommentController {
     }
 
     @GetMapping("/{comment_id}")
-    @Transactional
     public String viewReplies(@PathVariable long id, Model model, @PathVariable long comment_id) {
-        Zoo zoo = zooService.getZooById(id);
-        Comment comment = commentService.getCommentById(comment_id);
-        List<Comment> replies = comment.getReplies();
-        model.addAttribute("zoo", zoo);
-        model.addAttribute("comment", comment);
-        model.addAttribute("replies", replies);
+        ZooDTO zooDTO = zooService.getZooDTOById(id);
+        CommentDTO commentDTO = commentService.getCommentDTOById(comment_id);
+        model.addAttribute("zoo", zooDTO);
+        model.addAttribute("comment", commentDTO);
         model.addAttribute("commentDTO", new CommentCreationDTO());
-        model.addAttribute("zooOwner", zoo.getOwner());
 
         return "zoo-comments-replies";
     }

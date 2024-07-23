@@ -1,16 +1,19 @@
 package bg.softuni.zooarchitect.service;
 
 import bg.softuni.zooarchitect.model.dto.CommentCreationDTO;
+import bg.softuni.zooarchitect.model.dto.CommentDTO;
 import bg.softuni.zooarchitect.model.entity.Comment;
 import bg.softuni.zooarchitect.model.entity.User;
 import bg.softuni.zooarchitect.model.entity.Zoo;
 import bg.softuni.zooarchitect.repository.CommentRepository;
+import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class CommentService {
@@ -50,5 +53,14 @@ public class CommentService {
         originalComment.getReplies().add(reply);
         commentRepository.save(reply);
         commentRepository.save(originalComment);
+    }
+
+    @Transactional
+    public CommentDTO getCommentDTOById(long commentId) {
+        Comment comment = commentRepository.getReferenceById(commentId);
+        List<CommentDTO> replies = comment.getReplies().stream().map(c -> modelMapper.map(c, CommentDTO.class)).toList();
+        CommentDTO commentDTO = modelMapper.map(comment, CommentDTO.class);
+        commentDTO.setReplies(replies);
+        return commentDTO;
     }
 }

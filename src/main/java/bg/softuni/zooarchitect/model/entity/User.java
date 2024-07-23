@@ -1,9 +1,15 @@
 package bg.softuni.zooarchitect.model.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+import java.util.Set;
+
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 @Table(name = "users")
 public class User{
@@ -22,4 +28,12 @@ public class User{
 
     @OneToOne(mappedBy = "owner")
     private Zoo zoo;
+
+    @ManyToMany()
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Role> roles;
 }
