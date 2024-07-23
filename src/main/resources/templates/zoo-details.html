@@ -25,7 +25,8 @@
 				<!-- Main -->
 					<article id="main">
 						<header>
-							<h2 th:text="*{zoo.getName()}"></h2>
+							<h2><span th:text="*{zoo.getName()}"></span><br/>
+							BY: <span th:text="*{zoo.getOwner().getUsername()}"></span></h2>
 						</header>
 						<section class="wrapper style5">
 							<div class="inner">
@@ -43,7 +44,6 @@
 								</div>
 								<div>
 									<p><span class="image fit"><img th:src="*{zoo.getImageURL()}" alt="Zoo image" /></span><span th:text="*{zoo.getDescription()}"></span></p>
-									<p th:text="'Owned by: ' + *{zooOwner.getUsername()}"></p>
 									<p><a th:href="@{/zoos/{id}/animals(id=*{zoo.getId})}">View animals</a></p>
 									<p><a th:href="@{/zoos/{id}/comments(id=*{zoo.getId})}">View comments</a></p>
 								</div>

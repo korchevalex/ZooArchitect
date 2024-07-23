@@ -5,8 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 @Setter
@@ -28,11 +26,4 @@ public class Comment {
 
     @Column(nullable = false)
     private LocalDateTime time;
-
-    @OneToMany
-    private List<Comment> replies;
-
-    public Comment() {
-        this.replies = new ArrayList<>();
-    }
 }

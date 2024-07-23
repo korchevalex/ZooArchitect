@@ -25,12 +25,13 @@
     <!-- Main -->
     <article id="main">
         <header>
-            <h2>Add animal to <span th:text="*{zoo.getName()}"></span></h2>
+            <h2><span th:text="*{zoo.getName()}"></span><br/>
+                BY: <span th:text="*{zoo.getOwner().getUsername()}"></span></h2>
         </header>
         <section class="wrapper style5">
             <div class="inner">
                 <div th:each="animal : ${animalList}">
-                    <h3 th:text="*{animal.getName()}">Lorem ipsum dolor</h3>
+                    <h3 th:text="*{animal.getName()}"></h3>
                     <div class="box alt">
                         <div class="row gtr-50 gtr-uniform">
                             <div class="col-4">

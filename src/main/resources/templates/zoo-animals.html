@@ -25,13 +25,13 @@
     <!-- Main -->
     <article id="main">
         <header>
-            <h2 th:text="*{zoo.getName()}"></h2>
+            <header>
+                <h2><span th:text="*{zoo.getName()}"></span><br/>
+                    BY: <span th:text="*{zoo.getOwner().getUsername()}"></span></h2>
+            </header>
         </header>
         <section class="wrapper style5">
             <div class="inner">
-                <div>
-                    <h3 th:text="'Owned by: ' + *{zoo.getOwner().getUsername()}">Lorem ipsum dolor</h3>
-                </div>
                 <ul class="actions special">
                     <li><a th:href="@{/zoos/{id}/animals/add(id=*{zoo.getId()})}" class="button primary">Add animal</a></li>
                 </ul>

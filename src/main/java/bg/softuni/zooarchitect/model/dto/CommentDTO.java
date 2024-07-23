@@ -9,7 +9,6 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
-import java.util.List;
 
 @Getter
 @Setter
@@ -20,7 +19,6 @@ public class CommentDTO {
     private Zoo zoo;
     private String text;
     private LocalDateTime time;
-    private List<CommentDTO> replies;
     public String getShortTime() {
         return DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT).format(this.getTime());
     }

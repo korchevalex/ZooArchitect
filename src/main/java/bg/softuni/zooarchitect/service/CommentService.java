@@ -8,31 +8,28 @@ import bg.softuni.zooarchitect.model.entity.Zoo;
 import bg.softuni.zooarchitect.repository.CommentRepository;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Service
 public class CommentService {
     private final CommentRepository commentRepository;
-    private final ZooService zooService;
     private final UserService userService;
     private final ModelMapper modelMapper;
+    private final ZooService zooService;
 
-    public CommentService(CommentRepository commentRepository, ZooService zooService, UserService userService, ModelMapper modelMapper) {
+    public CommentService(CommentRepository commentRepository, UserService userService, ModelMapper modelMapper, ZooService zooService) {
         this.commentRepository = commentRepository;
-        this.zooService = zooService;
         this.userService = userService;
         this.modelMapper = modelMapper;
+        this.zooService = zooService;
     }
 
-    public void saveComment(CommentCreationDTO commentCreationDTO, Zoo zoo) {
+    public void saveComment(CommentCreationDTO commentCreationDTO, long id) {
         Comment comment = modelMapper.map(commentCreationDTO, Comment.class);
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findUserByUsername(auth.getName());
+        Zoo zoo = zooService.getZooById(id);
+        User user = userService.getCurrentUser();
         comment.setTime(LocalDateTime.now());
         comment.setAuthor(user);
         comment.setZoo(zoo);
@@ -43,24 +40,9 @@ public class CommentService {
         return commentRepository.getReferenceById(commentId);
     }
 
-    public void saveReply(CommentCreationDTO commentCreationDTO, long id, long comment_id) {
-        Comment reply = modelMapper.map(commentCreationDTO, Comment.class);
-        Comment originalComment = this.getCommentById(comment_id);
-        User user = userService.getCurrentUser();
-        reply.setAuthor(user);
-        reply.setZoo(zooService.getZooById(id));
-        reply.setTime(LocalDateTime.now());
-        originalComment.getReplies().add(reply);
-        commentRepository.save(reply);
-        commentRepository.save(originalComment);
-    }
-
     @Transactional
     public CommentDTO getCommentDTOById(long commentId) {
         Comment comment = commentRepository.getReferenceById(commentId);
-        List<CommentDTO> replies = comment.getReplies().stream().map(c -> modelMapper.map(c, CommentDTO.class)).toList();
-        CommentDTO commentDTO = modelMapper.map(comment, CommentDTO.class);
-        commentDTO.setReplies(replies);
-        return commentDTO;
+        return modelMapper.map(comment, CommentDTO.class);
     }
 }

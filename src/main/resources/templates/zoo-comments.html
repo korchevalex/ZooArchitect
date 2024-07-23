@@ -25,14 +25,11 @@
     <!-- Main -->
     <article id="main">
         <header>
-            <h2 th:text="*{zoo.getName()}"></h2>
+            <h2><span th:text="*{zoo.getName()}"></span><br/>
+                BY: <span th:text="*{zoo.getOwner().getUsername()}"></span></h2>
         </header>
         <section class="wrapper style5">
             <div class="inner">
-                <div>
-                    <h3 th:text="'Owned by: ' + *{zoo.getOwner().getUsername()}">Lorem ipsum dolor</h3>
-                </div>
-                <hr/>
                 <form th:method="POST" th:action="@{/zoos/{id}/comments/create(id=${zoo.getId()})}" th:object="${commentDTO}">
                     <div class="row gtr-uniform">
                         <div class="col-12">
@@ -53,7 +50,6 @@
                     <div class="col-12">
                         <h4 th:text="|*{comment.getAuthor().getUsername()} *{comment.getShortTime()}|"></h4>
                         <p th:text="*{comment.getText()}"></p>
-                        <a th:href="@{/zoos/{id}/comments/{comment_id}(id=${zoo.getId()},comment_id=${comment.getId()})}">View Replies</a>
                     </div>
                     <hr/>
                 </div>
