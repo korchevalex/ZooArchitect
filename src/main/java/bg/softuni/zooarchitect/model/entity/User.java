@@ -3,9 +3,6 @@ package bg.softuni.zooarchitect.model.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Data
 @Entity
 @Table(name = "users")

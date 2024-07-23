@@ -4,7 +4,6 @@ import bg.softuni.zooarchitect.model.dto.AnimalCreationDTO;
 import bg.softuni.zooarchitect.model.entity.Animal;
 import bg.softuni.zooarchitect.model.entity.Habitat;
 import bg.softuni.zooarchitect.repository.AnimalRepository;
-import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
