@@ -4,6 +4,7 @@ spring:
     properties:
       hibernate:
         format_sql: 'TRUE'
+        dialect: org.hibernate.dialect.MySQL8Dialect
 
     hibernate:
       ddl-auto: update

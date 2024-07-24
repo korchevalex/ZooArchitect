@@ -13,7 +13,7 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 public class ZooDTO {
-    private String id;
+    private long id;
     private String name;
     String description;
     private User owner;
