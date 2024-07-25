@@ -30,22 +30,21 @@
 						</header>
 						<section class="wrapper style5">
 							<div class="inner">
+								<div>
+									<p><span class="image fit"><img th:src="*{zoo.getImageURL()}" alt="Zoo image" /></span><span th:text="*{zoo.getDescription()}"></span></p>
+									<p><a th:href="@{/zoos/{id}/animals(id=*{zoo.getId})}">View animals</a></p>
+									<p><a th:href="@{/zoos/{id}/comments(id=*{zoo.getId})}">View comments</a></p>
+								</div>
 								<div th:if="${userOwnsZoo}">
 									<ul class="actions special">
 										<li>
-											<form th:method="Delete" th:action="@{/zoos/{id}/delete(id=*{zoo.getId()})}">
-												<button>
+											<form th:method="DELETE" th:action="@{/zoos/{id}/delete(id=*{zoo.getId()})}">
+												<button class="button primary">
 													Delete Zoo
 												</button>
 											</form>
 										</li>
 									</ul>
-									<hr />
-								</div>
-								<div>
-									<p><span class="image fit"><img th:src="*{zoo.getImageURL()}" alt="Zoo image" /></span><span th:text="*{zoo.getDescription()}"></span></p>
-									<p><a th:href="@{/zoos/{id}/animals(id=*{zoo.getId})}">View animals</a></p>
-									<p><a th:href="@{/zoos/{id}/comments(id=*{zoo.getId})}">View comments</a></p>
 								</div>
 							</div>
 						</section>

@@ -6,10 +6,7 @@ import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/habitats")
@@ -43,6 +40,16 @@ public class HabitatController {
 
         habitatService.save(habitatCreationDTO);
 
+        return "redirect:/habitats";
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteHabitat(@PathVariable long id) {
+        try {
+            habitatService.deleteHabitatById(id);
+        } catch (Exception e) {
+            return "habitat-delete-exception";
+        }
         return "redirect:/habitats";
     }
 }

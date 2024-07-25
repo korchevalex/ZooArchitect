@@ -47,6 +47,9 @@
                             <div class="col-8">
                                 <p th:text="|*{habitat.getTemperature()}C *{habitat.getWeatherCondition()}|"></p>
                                 <p th:text="*{habitat.getDescription()}"></p>
+                                <form th:method="DELETE" th:action="@{/habitats/{id}(id=*{habitat.getId()})}">
+                                    <button class="button primary">Delete Habitat</button>
+                                </form>
                             </div>
                         </div>
                     </div>

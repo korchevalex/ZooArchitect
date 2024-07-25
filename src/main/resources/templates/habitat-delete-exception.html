@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<!--
+	Spectral by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Zoo Visit</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <noscript><link rel="stylesheet" href="/css/noscript.css" /></noscript>
+</head>
+<body class="is-preload">
+
+<!-- Page Wrapper -->
+<div id="page-wrapper">
+
+    <!-- Header -->
+    <header th:replace="~{fragments/header.html}" id="header">
+    </header>
+
+    <!-- Main -->
+    <article id="main">
+        <header>
+            <h2 >We're sorry but you cannot delete<br/>
+                a habitat where animals already live.<br/>
+                <a th:href="@{/}">Go back to Zoo Architect.</a></h2>
+        </header>
+    </article>
+
+    <!-- Footer -->
+    <footer th:replace="~{fragments/footer.html}" id="footer">
+    </footer>
+
+</div>
+
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.scrollex.min.js"></script>
+<script src="/js/jquery.scrolly.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
+
+</body>
+</html>

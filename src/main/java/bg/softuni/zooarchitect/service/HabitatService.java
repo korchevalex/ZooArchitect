@@ -2,33 +2,53 @@ package bg.softuni.zooarchitect.service;
 
 import bg.softuni.zooarchitect.model.dto.HabitatCreationDTO;
 import bg.softuni.zooarchitect.model.entity.Habitat;
-import bg.softuni.zooarchitect.repository.HabitatRepository;
-import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClient;
 
 import java.util.List;
 
 @Service
 public class HabitatService {
-    private final HabitatRepository habitatRepository;
 
-    private final ModelMapper modelMapper;
+    private final RestClient restClient;
 
-    public HabitatService(HabitatRepository habitatRepository, ModelMapper modelMapper) {
-        this.habitatRepository = habitatRepository;
-        this.modelMapper = modelMapper;
+    public HabitatService(@Qualifier("habitatsRestClient") RestClient restClient) {
+        this.restClient = restClient;
     }
 
     public List<Habitat> getAll() {
-        return habitatRepository.findAll();
+        return restClient
+                .get()
+                .uri("/habitats")
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .body(new ParameterizedTypeReference<>(){});
     }
 
     public void save(HabitatCreationDTO habitatCreationDTO) {
-        Habitat habitat = modelMapper.map(habitatCreationDTO, Habitat.class);
-        habitatRepository.save(habitat);
+        restClient
+                .post()
+                .uri("/habitats/create")
+                .body(habitatCreationDTO)
+                .retrieve();
     }
 
     public Habitat getHabitatById(long habitatId) {
-        return habitatRepository.getReferenceById(habitatId);
+        return restClient.get()
+                .uri("/habitats/{habitatId}", habitatId)
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .body(Habitat.class);
+    }
+
+    public void deleteHabitatById(long habitatId) {
+        restClient
+                .delete()
+                .uri("/habitats/{habitatId}", habitatId)
+                .retrieve()
+                .body(Habitat.class);
     }
 }
