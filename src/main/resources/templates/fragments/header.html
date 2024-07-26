@@ -35,6 +35,7 @@
                                 <button th:text="#{nav_bar_logout}" class="button fit">Logout</button>
                             </form>
                         </li>
+                        <li sec:authorize="hasRole('ADMIN')"><a th:href="@{/admin}">ADMIN</a></li>
                     </ul>
                 </div>
             </li>

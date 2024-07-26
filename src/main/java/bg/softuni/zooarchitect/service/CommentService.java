@@ -45,4 +45,8 @@ public class CommentService {
         Comment comment = commentRepository.getReferenceById(commentId);
         return modelMapper.map(comment, CommentDTO.class);
     }
+
+    public void deleteAll() {
+        commentRepository.deleteAll();
+    }
 }

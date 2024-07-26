@@ -70,4 +70,8 @@ public class ZooService {
         zooDTO.setComments(commentDTOList);
         return zooDTO;
     }
+
+    public void deleteAll() {
+        zooRepository.deleteAll();
+    }
 }

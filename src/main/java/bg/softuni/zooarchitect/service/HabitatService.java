@@ -51,4 +51,12 @@ public class HabitatService {
                 .retrieve()
                 .body(Habitat.class);
     }
+
+    public void deleteAll() {
+        restClient
+                .delete()
+                .uri("/habitats")
+                .retrieve()
+                .body(Habitat.class);
+    }
 }

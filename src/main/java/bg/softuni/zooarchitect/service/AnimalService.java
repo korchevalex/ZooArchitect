@@ -41,4 +41,8 @@ public class AnimalService {
         animal.setHabitat(habitat);
         animalRepository.save(animal);
     }
+
+    public void deleteAll() {
+        animalRepository.deleteAll();
+    }
 }
