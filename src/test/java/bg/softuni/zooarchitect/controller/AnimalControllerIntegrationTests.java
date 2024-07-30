@@ -43,7 +43,7 @@ public class AnimalControllerIntegrationTests {
 
         mockMvc.perform(get("/animals"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("animals"))
+                .andExpect(view().name("animals/animals"))
                 .andExpect(model().attributeExists("animalList"));
     }
 
@@ -52,7 +52,7 @@ public class AnimalControllerIntegrationTests {
     public void testViewCreateAnimal() throws Exception {
         mockMvc.perform(get("/animals/create"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("animal-create"))
+                .andExpect(view().name("animals/create"))
                 .andExpect(model().attributeExists("animalDTO"));
     }
 
@@ -81,7 +81,7 @@ public class AnimalControllerIntegrationTests {
 
         mockMvc.perform(get("/animals/1/habitat"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("animal-habitat"))
+                .andExpect(view().name("animals/habitat"))
                 .andExpect(model().attributeExists("animal"))
                 .andExpect(model().attributeExists("habitat"));
     }
@@ -110,7 +110,7 @@ public class AnimalControllerIntegrationTests {
 
         mockMvc.perform(get("/animals/1/habitat/select"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("animal-habitat-select"))
+                .andExpect(view().name("animals/habitat-select"))
                 .andExpect(model().attributeExists("animalId"))
                 .andExpect(model().attributeExists("animalName"))
                 .andExpect(model().attributeExists("habitatList"));

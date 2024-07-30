@@ -26,14 +26,14 @@ public class AnimalController {
     @GetMapping("")
     public String viewAnimals(Model model) {
         model.addAttribute("animalList", animalService.getAllAnimals());
-        return "animals";
+        return "animals/animals";
     }
 
     @GetMapping("/create")
     public String viewCreateAnimal(Model model)
     {
         model.addAttribute("animalDTO", new AnimalCreationDTO());
-        return "animal-create";
+        return "animals/create";
     }
 
     @PostMapping("/create")
@@ -41,7 +41,7 @@ public class AnimalController {
             @Valid @ModelAttribute("animalDTO") AnimalCreationDTO animalCreationDTO,
             BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "animal-create";
+            return "animals/create";
         }
 
         animalService.save(animalCreationDTO);
@@ -60,7 +60,7 @@ public class AnimalController {
         model.addAttribute("animal", animal);
         model.addAttribute("habitat", animal.getHabitat());
 
-        return "animal-habitat";
+        return "animals/habitat";
     }
 
     @GetMapping("/{id}/habitat/select")
@@ -71,7 +71,7 @@ public class AnimalController {
         model.addAttribute("animalName", animal.getName());
         model.addAttribute("habitatList", habitatService.getAll());
 
-        return "animal-habitat-select";
+        return "animals/habitat-select";
     }
 
     @PostMapping("/{animalId}/habitat/select/{habitatId}")

@@ -31,7 +31,7 @@ public class ZooController {
     public String viewZoos(Model model) {
         model.addAttribute("zooList", zooService.getAllZoos());
         model.addAttribute("zooExists", zooService.zooExists());
-        return "zoos";
+        return "zoos/zoos";
     }
 
     @GetMapping("/create")
@@ -40,7 +40,7 @@ public class ZooController {
             return "redirect:/zoos";
         }
         model.addAttribute("zooDTO", new ZooCreationDTO());
-        return "zoo-create";
+        return "zoos/create";
     }
 
     @PostMapping("/create")
@@ -51,7 +51,7 @@ public class ZooController {
             return "redirect:/zoos";
         }
         if (bindingResult.hasErrors()) {
-            return "zoo-create";
+            return "zoos/create";
         }
 
         zooService.save(zooCreationDTO);
@@ -66,7 +66,7 @@ public class ZooController {
         model.addAttribute("zoo", zoo);
         model.addAttribute("zooOwner", zoo.getOwner());
         model.addAttribute("userOwnsZoo", zoo.getOwner().equals(userService.getCurrentUser()));
-        return "zoo-details";
+        return "zoos/details";
     }
 
     @DeleteMapping("/{id}/delete")
@@ -83,16 +83,18 @@ public class ZooController {
     public String viewAddAnimal(Model model, @PathVariable long id) {
         Zoo zoo = zooService.getZooById(id);
         if (!userService.getCurrentUser().equals(zoo.getOwner())) {
+            //noinspection SpringMVCViewInspection
             return "redirect:/zoos/" + id + "/animals";
         }
         model.addAttribute("animalList", animalService.getAllAnimals());
         model.addAttribute("zoo", zoo);
-        return "zoo-animals-add";
+        return "zoos/animals-add";
     }
 
     @PostMapping("/{zooId}/animals/add/{animalId}")
     public String addAnimal(@PathVariable long animalId, @PathVariable long zooId) {
         zooService.addAnimalToZoo(animalId, zooId);
+        //noinspection SpringMVCViewInspection
         return "redirect:/zoos/" + zooId + "/animals";
     }
 
@@ -102,7 +104,7 @@ public class ZooController {
         ZooDTO zooDTO = zooService.getZooDTOById(id);
         model.addAttribute("zoo", zooDTO);
         model.addAttribute("animalList", zooDTO.getAnimals());
-        return "zoo-animals";
+        return "zoos/animals";
     }
 
     @GetMapping("/my")

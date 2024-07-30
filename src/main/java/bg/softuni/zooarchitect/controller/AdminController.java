@@ -28,7 +28,7 @@ public class AdminController {
     @GetMapping("/admin")
     public String viewAdmin() {
         if (isAdmin()) {
-            return "admin";
+            return "admin/admin";
         }
         return "redirect:/";
     }

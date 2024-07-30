@@ -27,7 +27,7 @@ public class CommentController {
         model.addAttribute("zoo", zooDTO);
         model.addAttribute("comments", zooDTO.getComments());
         model.addAttribute("commentDTO", new CommentCreationDTO());
-        return "zoo-comments";
+        return "comments/comments";
     }
 
     @PostMapping("/create")

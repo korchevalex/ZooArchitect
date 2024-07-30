@@ -59,7 +59,7 @@ public class CommentControllerIntegrationTests {
 
         mockMvc.perform(get("/zoos/1/comments"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("zoo-comments"))
+                .andExpect(view().name("comments/comments"))
                 .andExpect(model().attributeExists("zoo"))
                 .andExpect(model().attributeExists("comments"))
                 .andExpect(model().attributeExists("commentDTO"));

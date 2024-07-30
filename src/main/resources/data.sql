@@ -1,4 +1,4 @@
-insert into zoo_architect.roles (id, name)
+insert into zoo_architect.roles (id, role)
 values (1, 'USER'),
        (2, 'ADMIN');
 

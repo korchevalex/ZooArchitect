@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+Hello, <th:block th:text="${userName}"></th:block>!
+
+<h2 class="mt-2 mb-0 font-monospace">
+    Welcome to ZooArchitect!
+</h2>
+<p>
+    You can now <a th:href="@{http://localhost:8080/users/login}">login</a> to our site and begin creating!
+</p>
+
+<p>
+    Best regards,
+</p>
+<h4>
+    <i>ZooArchitect team</i>
+</h4>
+
+</body>
+</html>

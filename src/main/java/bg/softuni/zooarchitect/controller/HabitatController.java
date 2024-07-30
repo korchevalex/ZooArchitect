@@ -20,14 +20,14 @@ public class HabitatController {
     @GetMapping("")
     public String viewHabitats(Model model) {
         model.addAttribute("habitatList", habitatService.getAll());
-        return "habitats";
+        return "habitats/habitats";
     }
 
     @GetMapping("/create")
     public String viewCreateHabitat(Model model)
     {
         model.addAttribute("habitatDTO", new HabitatCreationDTO());
-        return "habitat-create";
+        return "habitats/create";
     }
 
     @PostMapping("/create")
@@ -35,7 +35,7 @@ public class HabitatController {
             @Valid @ModelAttribute("habitatDTO") HabitatCreationDTO habitatCreationDTO,
             BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "habitat-create";
+            return "habitats/create";
         }
 
         habitatService.save(habitatCreationDTO);

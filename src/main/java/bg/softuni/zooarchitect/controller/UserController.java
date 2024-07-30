@@ -1,8 +1,10 @@
 package bg.softuni.zooarchitect.controller;
 
+import bg.softuni.zooarchitect.event.UserRegisteredEvent;
 import bg.softuni.zooarchitect.model.dto.UserRegisterDTO;
 import bg.softuni.zooarchitect.service.UserService;
 import jakarta.validation.Valid;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -12,15 +14,17 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/users")
 public class UserController {
     private final UserService userService;
+    private final ApplicationEventPublisher eventPublisher;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, ApplicationEventPublisher eventPublisher) {
         this.userService = userService;
+        this.eventPublisher = eventPublisher;
     }
 
     @GetMapping("/register")
     public String viewRegister(Model model) {
         model.addAttribute("userDTO", new UserRegisterDTO());
-        return "register";
+        return "user/register";
     }
 
     @PostMapping("/register")
@@ -43,8 +47,10 @@ public class UserController {
         }
 
         if (hasErrors) {
-            return "register";
+            return "user/register";
         }
+
+        eventPublisher.publishEvent(new UserRegisteredEvent(this, userRegisterDTO));
 
         return "redirect:/login";
     }
@@ -54,6 +60,6 @@ public class UserController {
         if (error != null) {
             model.addAttribute("credentialMismatch", true);
         }
-        return "login";
+        return "user/login";
     }
 }
