@@ -29,6 +29,11 @@ logging:
     blog: WARN
 server:
   port: 8080
+
 habitats:
   api:
     base-url: http://localhost:8081
+
+jwt:
+  secret: ${JWT_KEY:$2a$12$rJjJdUgI1NT7EQorqQfmR.EtLq7SDOM2cutE0Z5/9SX9tttd5il2W$2a$12$rJjJdUgI1NT7EQorqQfmR.EtLq7SDOM2cutE0Z5/9SX9tttd5il2W}
+  expiration: ${JWT_EXPIRATION:60000}

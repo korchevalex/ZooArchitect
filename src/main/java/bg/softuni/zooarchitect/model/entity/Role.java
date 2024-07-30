@@ -1,11 +1,11 @@
 package bg.softuni.zooarchitect.model.entity;
 
+import bg.softuni.zooarchitect.model.enums.UserRoleEnum;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.Set;
 
 @Getter
 @Setter
@@ -17,9 +17,8 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(unique = true, nullable = false)
-    private String name;
-
-    @ManyToMany(mappedBy = "roles")
-    private Set<User> users;
+    @NotNull
+    @Column(unique = true)
+    @Enumerated(EnumType.STRING)
+    private UserRoleEnum role;
 }

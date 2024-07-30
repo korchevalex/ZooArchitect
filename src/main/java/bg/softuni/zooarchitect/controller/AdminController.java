@@ -22,7 +22,7 @@ public class AdminController {
     }
 
     private boolean isAdmin () {
-        return userService.getCurrentUser().getRoles().stream().anyMatch(r -> "ADMIN".equals(r.getName()));
+        return userService.getCurrentUser().getRoles().stream().anyMatch(r -> "ADMIN".equals(r.getRole().toString()));
     }
 
     @GetMapping("/admin")

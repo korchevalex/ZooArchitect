@@ -3,6 +3,7 @@ package bg.softuni.zooarchitect.service;
 import bg.softuni.zooarchitect.model.dto.UserRegisterDTO;
 import bg.softuni.zooarchitect.model.entity.Role;
 import bg.softuni.zooarchitect.model.entity.User;
+import bg.softuni.zooarchitect.model.enums.UserRoleEnum;
 import bg.softuni.zooarchitect.repository.RoleRepository;
 import bg.softuni.zooarchitect.repository.UserRepository;
 import org.junit.jupiter.api.AfterEach;
@@ -61,11 +62,11 @@ public class UserServiceTests {
         userRegisterDTO.setConfirmPassword("password");
         User user = new User();
         Role role = new Role();
-        role.setName("USER");
+        role.setRole(UserRoleEnum.USER);
 
         when(modelMapper.map(any(UserRegisterDTO.class), eq(User.class))).thenReturn(user);
         when(passwordEncoder.encode(userRegisterDTO.getPassword())).thenReturn("encodedPassword");
-        when(roleRepository.findByName("USER")).thenReturn(Optional.of(role));
+        when(roleRepository.findByRole(UserRoleEnum.USER)).thenReturn(Optional.of(role));
 
         userService.save(userRegisterDTO);
 
@@ -99,7 +100,7 @@ public class UserServiceTests {
 
         when(modelMapper.map(userRegisterDTO, User.class)).thenReturn(user);
         when(passwordEncoder.encode(userRegisterDTO.getPassword())).thenReturn("encodedPassword");
-        when(roleRepository.findByName("USER")).thenReturn(Optional.empty());
+        when(roleRepository.findByRole(UserRoleEnum.USER)).thenReturn(Optional.empty());
 
         RuntimeException thrownException = assertThrows(RuntimeException.class,
                 () -> userService.save(userRegisterDTO),

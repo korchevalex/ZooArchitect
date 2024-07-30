@@ -3,6 +3,8 @@ package bg.softuni.zooarchitect.service;
 import bg.softuni.zooarchitect.model.dto.UserRegisterDTO;
 import bg.softuni.zooarchitect.model.entity.Role;
 import bg.softuni.zooarchitect.model.entity.User;
+import bg.softuni.zooarchitect.model.enums.UserRoleEnum;
+import bg.softuni.zooarchitect.model.user.ZooUserDetails;
 import bg.softuni.zooarchitect.repository.RoleRepository;
 import bg.softuni.zooarchitect.repository.UserRepository;
 import jakarta.transaction.Transactional;
@@ -39,7 +41,7 @@ public class UserService  {
         User user = modelMapper.map(userRegisterDTO, User.class);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
-        Optional<Role> roleOptional = roleRepository.findByName("USER");
+        Optional<Role> roleOptional = roleRepository.findByRole(UserRoleEnum.USER);
         if (roleOptional.isPresent()) {
             Set<Role> roles = new HashSet<>();
             roles.add(roleOptional.get());
@@ -67,5 +69,14 @@ public class UserService  {
 
     public boolean emailIsTaken(UserRegisterDTO userRegisterDTO) {
         return userRepository.findByEmail(userRegisterDTO.getEmail()).isPresent();
+    }
+
+    public Optional<ZooUserDetails> getCurrentUserDetails() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null &&
+                authentication.getPrincipal() instanceof ZooUserDetails mobileleZooUserDetails) {
+            return Optional.of(mobileleZooUserDetails);
+        }
+        return Optional.empty();
     }
 }
