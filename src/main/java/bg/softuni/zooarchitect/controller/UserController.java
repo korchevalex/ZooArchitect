@@ -1,5 +1,6 @@
 package bg.softuni.zooarchitect.controller;
 
+import bg.softuni.zooarchitect.controller.aop.WarnIfExecutionExceeds;
 import bg.softuni.zooarchitect.event.UserRegisteredEvent;
 import bg.softuni.zooarchitect.model.dto.UserRegisterDTO;
 import bg.softuni.zooarchitect.service.UserService;
@@ -27,6 +28,7 @@ public class UserController {
         return "user/register";
     }
 
+    @WarnIfExecutionExceeds(threshold = 100)
     @PostMapping("/register")
     public String register(@Valid @ModelAttribute("userDTO") UserRegisterDTO userRegisterDTO, BindingResult result, Model model) {
         boolean hasErrors = result.hasErrors();
