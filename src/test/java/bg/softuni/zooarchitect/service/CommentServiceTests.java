@@ -6,6 +6,7 @@ import bg.softuni.zooarchitect.model.entity.Comment;
 import bg.softuni.zooarchitect.model.entity.User;
 import bg.softuni.zooarchitect.model.entity.Zoo;
 import bg.softuni.zooarchitect.repository.CommentRepository;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -82,5 +83,15 @@ public class CommentServiceTests {
         verify(commentRepository, times(1)).getReferenceById(1L);
         verify(modelMapper, times(1)).map(comment, CommentDTO.class);
         assertEquals(commentDTO, result);
+    }
+
+    @Test
+    public void testDeleteAllComments() {
+        Comment comment = new Comment();
+        commentRepository.save(comment);
+
+        commentService.deleteAll();
+        verify(commentRepository).deleteAll();
+        Assertions.assertTrue(commentRepository.findAll().isEmpty());
     }
 }

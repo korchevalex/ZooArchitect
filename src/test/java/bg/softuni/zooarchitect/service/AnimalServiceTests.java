@@ -4,6 +4,7 @@ import bg.softuni.zooarchitect.model.dto.AnimalCreationDTO;
 import bg.softuni.zooarchitect.model.entity.Animal;
 import bg.softuni.zooarchitect.model.entity.Habitat;
 import bg.softuni.zooarchitect.repository.AnimalRepository;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -84,5 +85,15 @@ public class AnimalServiceTests {
 
         verify(animalRepository).save(animal);
         assertEquals(habitat, animal.getHabitat());
+    }
+
+    @Test
+    public void testDeleteAllAnimals() {
+        Animal animal = new Animal();
+        animalRepository.save(animal);
+
+        animalService.deleteAll();
+        verify(animalRepository).deleteAll();
+        Assertions.assertTrue(animalRepository.findAll().isEmpty());
     }
 }

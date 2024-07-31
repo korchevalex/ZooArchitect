@@ -9,6 +9,7 @@ import bg.softuni.zooarchitect.model.entity.User;
 import bg.softuni.zooarchitect.model.entity.Zoo;
 import bg.softuni.zooarchitect.repository.ZooRepository;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -182,5 +183,15 @@ public class ZooServiceTests {
 
         assertEquals(zooDTO, result);
         assertEquals(commentDTOList, result.getComments());
+    }
+
+    @Test
+    public void testDeleteAllZoos() {
+        Zoo zoo = new Zoo();
+        zooRepository.save(zoo);
+
+        zooService.deleteAll();
+        verify(zooRepository).deleteAll();
+        Assertions.assertTrue(zooRepository.findAll().isEmpty());
     }
 }
