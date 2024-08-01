@@ -50,12 +50,13 @@
                                     <div th:if="${passwordMismatch}" class="text-danger">Passwords do not match.</div>
                                 </div>
                                 <div class="col-12">
-                                    <ul class="actions">
+                                    <ul class="actions special">
                                         <li><input type="submit" value="Register" class="primary" /></li>
                                     </ul>
                                 </div>
                             </div>
                         </form>
+                        <p class="align-center">Already have an account? <a th:href="@{/users/login}">Log in</a></p>
                     </div>
                 </section>
             </article>
