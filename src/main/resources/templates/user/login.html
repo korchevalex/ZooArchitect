@@ -26,12 +26,12 @@
                         <form th:method="post" th:action="@{/users/login}">
                             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                             <div th:if="${credentialMismatch}" class="text-danger">Invalid username or password.</div>
-                            <div class="row gtr-uniform">
-                                <div class="col-6 col-12-xsmall">
+                            <div class="row aln-center gtr-uniform">
+                                <div class="col-7">
                                     <label for="username"></label>
                                     <input type="text" name="username" id="username" value="" placeholder="Username" required/>
                                 </div>
-                                <div class="col-6 col-12-xsmall">
+                                <div class="col-7">
                                     <label for="password"></label>
                                     <input type="password" name="password" id="password" value="" placeholder="Password" required/>
                                 </div>

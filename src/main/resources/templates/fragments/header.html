@@ -11,7 +11,6 @@
                 <div id="menu">
                     <ul>
                         <li sec:authorize="hasRole('ADMIN')"><a th:href="@{/admin}">ADMIN</a></li>
-                        <li sec:authorize="isAuthenticated()"><a th:href="@{/elements}">Elements</a></li>
                         <li sec:authorize="isAnonymous()"><a th:text="#{register}" th:href="@{/users/register}">Register</a></li>
                         <li sec:authorize="isAnonymous()"><a th:text="#{login}" th:href="@{/users/login}">Log In</a></li>
                         <li sec:authorize="isAuthenticated()"><a th:text="#{explore_zoos}" th:href="@{/zoos}">Explore Zoos</a></li>
